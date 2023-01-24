@@ -32,8 +32,6 @@ class Solution {
             if (left == null || right == null) return false;
             if (left.val != right.val) return false;
             
-            left.val = right.val = Integer.MIN_VALUE;
-            
             ls.push(left.left);
             ls.push(left.right);
             
