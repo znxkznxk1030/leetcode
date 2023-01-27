@@ -23,6 +23,7 @@ class Solution {
                         if (i == word.length()) {
                             System.out.println(word);
                             result.add(word);
+                            break;
                         }
                     }
                 }
@@ -31,7 +32,7 @@ class Solution {
             wordSet.add(word);
         }
 
-        result = result.stream().distinct().collect(Collectors.toList());
+        // result = result.stream().distinct().collect(Collectors.toList());
 
         return result;
     }
