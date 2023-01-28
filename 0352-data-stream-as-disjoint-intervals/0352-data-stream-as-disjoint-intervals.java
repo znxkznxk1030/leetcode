@@ -17,7 +17,6 @@ class SummaryRanges {
         while (low < high) {
             mid = low + (high - low) / 2;
             int[] curr = data.get(mid);
-            System.out.println("mid - " + curr[0] + " - " + curr[1]);
             
             if (curr[0] > value) {
                 high = mid ;
@@ -34,8 +33,6 @@ class SummaryRanges {
         int[] prev = index >= 1?data.get(index - 1):null;
         int[] post = data.size() > index + 1?data.get(index + 1):null;
         
-        System.out.println("prev - " + prev + " post - " + post);
-        
         while((prev != null && prev[1] + 1 >= num[0]) || (post != null && post[0] <= num[1] + 1)) {
             if (prev != null && prev[1] + 1 >= num[0]) {
                 prev[1] = Math.max(num[1], prev[1]);
@@ -43,16 +40,15 @@ class SummaryRanges {
                 num = prev;
                 index = index - 1;
                 
-                System.out.println("prev - index : " + index);
                 System.out.println("prev : " + prev[0] + " - " + prev[1]);
             }
             
             if (post != null && post[0] <= num[1] + 1) {
                 post[0] = Math.min(num[0], post[0]);
-                System.out.println("post - index : " + index);
-                System.out.println("post : " + post[0] + " - " + post[1]);
                 data.remove(index);
                 num = post;
+                
+                System.out.println("post : " + post[0] + " - " + post[1]);
             }
             
             prev = index >= 1?data.get(index - 1):null;
