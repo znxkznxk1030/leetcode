@@ -5,14 +5,10 @@ class Solution {
         var i: Int = 0
         var j: Int = 1
         var k: Int = -1
-        var result: Int = 0
-        
-        println(chars.size)
         
         while(j < chars.size) {
             if (chars[j] != chars[i]) {
                 val size: Int = j - i
-                result += 1 + log10(size)
                 
                 chars[++k] = chars[i]
                 if (size > 1) {
@@ -28,7 +24,6 @@ class Solution {
         }
         
         val size: Int = j - i
-        result += 1 + log10(size)
         chars[++k] = chars[i]
         if (size > 1) {
             for (ch in size.toString()) {
@@ -36,9 +31,7 @@ class Solution {
             }
         }
         
-        chars.slice(0..k)
-                
-        return result
+        return k + 1
     }
     
     fun log10 (size: Int) :Int {
