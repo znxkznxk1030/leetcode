@@ -17,10 +17,6 @@ class Solution {
         val idx = inorder.indexOf(postorder[postorder.lastIndex])
         
         if (idx >= 0) {
-            // println(Arrays.toString(inorder.copyOfRange(0, idx)))
-            // println(Arrays.toString(postorder.copyOfRange(0, idx)))
-            // println(Arrays.toString(inorder.copyOfRange(idx + 1, inorder.size)))
-            // println(Arrays.toString(postorder.copyOfRange(idx, postorder.size - 1)))
             root.left = buildTree(inorder.copyOfRange(0, idx), postorder.copyOfRange(0, idx))
             root.right = buildTree(inorder.copyOfRange(idx + 1, inorder.size), postorder.copyOfRange(idx, postorder.size - 1))
         }
