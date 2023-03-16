@@ -10,11 +10,11 @@
  */
 class Solution {
     fun buildTree(inorder: IntArray, postorder: IntArray): TreeNode? {
-        if (postorder.size == 1) return TreeNode(postorder[postorder.lastIndex])
+        if (postorder.size == 1) return TreeNode(postorder.last())
         if (postorder.size == 0) return null
         
-        val root = TreeNode(postorder[postorder.lastIndex])
-        val idx = inorder.indexOf(postorder[postorder.lastIndex])
+        val root = TreeNode(postorder.last())
+        val idx = inorder.indexOf(postorder.last())
         
         if (idx >= 0) {
             root.left = buildTree(inorder.copyOfRange(0, idx), postorder.copyOfRange(0, idx))
