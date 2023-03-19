@@ -8,7 +8,6 @@ class Trie {
 }
 
 class WordDictionary() {
-    
     val root = Trie()
 
     fun addWord(word: String) {
