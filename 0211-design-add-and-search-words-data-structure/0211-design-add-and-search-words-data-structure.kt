@@ -29,20 +29,14 @@ class WordDictionary() {
     }
     
     fun searchHelper(word: String, curr: Trie?): Boolean {
-        if (curr == null) return false
-        if (word.length == 0 && (curr == null || !curr.isEnd)) return false
+        if (curr == null || (word.length == 0 && !curr.isEnd)) return false
         if (word.length == 0) return true
-        val ch = word[0]
         
+        val ch = word[0]
         if (ch == '.') {
-            for (i in 0 .. 25) {
-                if (searchHelper(word.substring(1), curr!!.next[i]) == true) {
-                    return true
-                }
-            }
-            return false
+            return (0..25).any{ searchHelper(word.substring(1), curr.next[it]) }
         } else {
-            return if (curr!!.next[ch - 'a'] == null) false else searchHelper(word.substring(1), curr!!.next[ch - 'a'])
+            return if (curr.next[ch - 'a'] == null) false else searchHelper(word.substring(1), curr.next[ch - 'a'])
         }
     }
 }
