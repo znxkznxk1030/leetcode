@@ -7,8 +7,6 @@ class Solution {
             graph.computeIfAbsent(road[1]){ mutableListOf() }.add(Pair(road[0], road[2]))
         }
         
-        println("${graph}")
-        
         var result = Int.MAX_VALUE
         
         val q = LinkedList<Int>()
