@@ -19,10 +19,11 @@ class UnionFind {
         
         if (ranks[fx] < ranks[fy]) {
             ids[fx] = fy
-            ranks[fx] += ranks[fy]
+        } else if (ranks[fx] > ranks[fy]) {
+            ids[fy] = fx
         } else {
             ids[fy] = fx
-            ranks[fy] += ranks[fx]
+            ranks[fx]++
         }
     }
 }
