@@ -1,21 +1,16 @@
 class Solution {
     fun canJump(nums: IntArray): Boolean {
-        val visit = BooleanArray(nums.size){ false }
+        if (nums.size < 2) return true
         
-        val q = LinkedList<Int>()
-        q.offer(0)
+        val dp = IntArray(nums.size){ 0 }
+        dp[0] = nums[0]
+        if (dp[0] == 0) return false
         
-        while(!q.isEmpty()) {
-            val curr = q.poll()
-            
-            for (next in curr..Math.min(curr + nums[curr], nums.size - 1))  {
-                if (visit[next]) continue
-                visit[next] = true
-                
-                q.offer(next)
-            }
+        for (i in 1 until nums.size - 1) {
+            dp[i] = Math.max(nums[i], dp[i - 1] - 1)
+            if (dp[i] == 0) return false
         }
         
-        return visit[nums.size - 1]
+        return dp[nums.size - 2] >= 1
     }
 }
