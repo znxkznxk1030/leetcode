@@ -4,11 +4,9 @@ class Solution {
         
         val dp = IntArray(nums.size){ 0 }
         dp[0] = nums[0]
-        if (dp[0] == 0) return false
         
         for (i in 1 until nums.size - 1) {
-            dp[i] = Math.max(nums[i], dp[i - 1] - 1)
-            if (dp[i] == 0) return false
+            if(dp[i - 1] > 0) dp[i] = Math.max(nums[i], dp[i - 1] - 1)
         }
         
         return dp[nums.size - 2] >= 1
