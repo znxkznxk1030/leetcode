@@ -1,18 +1,20 @@
 class Solution {
     fun jump(nums: IntArray): Int {
-        var answer: Int = 0;
-        var curEnd: Int = 0;
-        var curFur: Int = 0;
-
+        var answer = 0
+        var curFur = 0
+        var curIdx = 0
+        
         for (i in 0 until nums.size - 1) {
-            curFur = Math.max(curFur, i + nums[i]);
-
-            if (curEnd == i) {
+            if (nums[i] + i > curFur) {
+                curFur = nums[i] + i
+            }
+            
+            if (curIdx == i) {
+                curIdx = curFur
                 answer++;
-                curEnd = curFur;
             }
         }
-
-        return answer;
+        
+        return answer
     }
 }
