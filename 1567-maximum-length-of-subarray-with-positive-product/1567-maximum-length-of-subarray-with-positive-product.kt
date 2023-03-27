@@ -1,6 +1,5 @@
 class Solution {
     fun getMaxLen(nums: IntArray): Int {
-        val dp = Array(nums.size){ IntArray(2){0} }
         var positive = 0
         var negative = 0
         
