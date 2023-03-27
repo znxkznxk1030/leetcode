@@ -1,31 +1,31 @@
 class Solution {
     fun getMaxLen(nums: IntArray): Int {
         val dp = Array(nums.size){ IntArray(2){0} }
+        var positive = 0
+        var negative = 0
         
         if (nums[0] > 0) {
-            dp[0][0] = 1   
+            positive = 1   
         } else if (nums[0] < 0) {
-            dp[0][1] = 1
-        } else {
-            dp[0][0] = 0
-            dp[0][1] = 0
+            negative = 1
         }
         
-        var result = dp[0][0]
+        var result = positive
         
         for (i in 1 until nums.size) {
             if (nums[i] > 0) {
-                dp[i][0] = dp[i - 1][0] + 1
-                dp[i][1] = if (dp[i - 1][1] > 0 ) dp[i - 1][1] + 1 else 0
+                positive = positive + 1
+                negative = if (negative > 0 ) negative + 1 else 0
             } else if (nums[i] < 0) {
-                dp[i][0] = if (dp[i - 1][1] > 0 ) dp[i - 1][1] + 1 else 0
-                dp[i][1] = dp[i - 1][0] + 1
+                var _positive = positive
+                positive = if (negative > 0) negative + 1 else 0
+                negative = _positive + 1
             } else {
-                dp[i][0] = 0
-                dp[i][1] = 0
+                positive = 0
+                negative = 0
             }
             
-            result = Math.max(result, dp[i][0])
+            result = Math.max(result, positive)
         }
         
         return result
