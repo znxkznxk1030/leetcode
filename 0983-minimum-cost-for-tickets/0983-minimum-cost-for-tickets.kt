@@ -1,23 +1,27 @@
 class Solution {
+    var costs = IntArray(3)
+    var dp = IntArray(366){ -1 }
+    val dayset = HashSet<Int>()
+    
     fun mincostTickets(days: IntArray, costs: IntArray): Int {
-        val dp = IntArray(days.size + 1){ 99999999 }
-        dp[0] = 0
+        this.costs = costs
+        days.forEach{ dayset.add(it) }
+        return dfs(1)
+    }
+    
+    fun dfs(day: Int): Int {
+        if (day > 365) return 0
+        if (dp[day] > 0) return dp[day]
         
-        for (i in 1 .. days.size) {
-            dp[i] = Math.min(dp[i], dp[i - 1] + Math.min(costs[0], Math.min(costs[1], costs[2])))
-            
-            for (j in i - 1 downTo 1) {
-                val diff = days[i - 1] - days[j - 1]
-                if (diff < 7) {
-                    dp[i] = Math.min(dp[i], dp[j - 1] + costs[1])
-                }
-                
-                if (diff < 30) {
-                    dp[i] = Math.min(dp[i], dp[j - 1] + costs[2])
-                }
-            }
+        var result: Int
+        
+        if (dayset.contains(day)) {
+            result = Math.min(dfs(day + 1) + costs[0], Math.min(dfs(day + 7) + costs[1], dfs(day + 30) + costs[2]))
+        } else {
+            result = dfs(day + 1)
         }
         
-        return dp[days.size]
+        dp[day] = result
+        return result
     }
 }
