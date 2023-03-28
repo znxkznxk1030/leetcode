@@ -1,7 +1,7 @@
 class Solution {
     fun maxProfit(prices: IntArray): Int {
         var result = 0
-        var curr = prices[0]
+        var curr = Int.MAX_VALUE
         
         for (price in prices) {
             if (price < curr) {
