@@ -3,7 +3,7 @@ class Solution {
     
     fun isScramble(s1: String, s2: String): Boolean {
         if (s1.equals(s2)) return true
-        if (!isAnygram(s1, s2)) return false
+        if (!isAnagram(s1, s2)) return false
         
         memo["${s1} - ${s2}"]?.let{
             return it
@@ -28,7 +28,7 @@ class Solution {
     }
     
     
-    fun isAnygram(s1: String, s2: String): Boolean {
+    fun isAnagram(s1: String, s2: String): Boolean {
         val visit = HashMap<Char, Int>()
         
         s1.forEach{ visit.put(it, visit.getOrDefault(it, 0) + 1)}
