@@ -2,13 +2,11 @@ class Solution {
     fun eventualSafeNodes(graph: Array<IntArray>): List<Int> {
         val n = graph.size
         val adj = Array(n){ mutableListOf<Int>() }
-        val rev = Array(n){ mutableListOf<Int>() }
         val indegree = IntArray(n)
         
         for (v in graph.indices) {
             for (u in graph[v]) {
                 adj[u].add(v)
-                rev[v].add(u)
                 indegree[v]++
             }
         }
