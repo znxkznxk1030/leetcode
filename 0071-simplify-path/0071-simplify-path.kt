@@ -1,6 +1,6 @@
 class Solution {
     fun simplifyPath(path: String): String {
-        var tokens = path.replace("//", "/").split("/")
+        var tokens = path.split("/")
         var stack = Stack<String>()
         
         for (token in tokens) {
