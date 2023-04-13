@@ -11,11 +11,6 @@ class Solution {
             }
         }
         
-        while(!stack.isEmpty() && stack.peek() == popped[j]){
-            stack.pop()
-            j++
-        }
-        
         return j == popped.size && stack.isEmpty()
     }
 }
