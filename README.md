@@ -4,6 +4,7 @@ to drill a algorithm skills
 
 ## More problems with sliding window/ 2-3 pointers / counting:
 
+```txt
 696. Count Binary Substrings
 713. Subarray Product Less Than K
 930. Binary Subarrays With Sum
@@ -24,3 +25,4 @@ parent problem for 3 pointers -> 992. Subarrays with K Different Integers
 904. Fruit Into Baskets
 862. Shortest Subarray with Sum at Least K
 209. Minimum Size Subarray Sum
+```
