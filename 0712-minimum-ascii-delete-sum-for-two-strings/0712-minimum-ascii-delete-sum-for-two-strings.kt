@@ -26,9 +26,9 @@ class Solution {
                 }
             }
         }
-        println("${common}")
+        // println("${common}")
         
-        var result = getSum(s1.toMutableList()) + getSum(s2.toMutableList()) - getSum(common) - getSum(common)
+        var result = getSum(s1.toMutableList()) + getSum(s2.toMutableList()) - getSum(common) * 2
         return result
     }
     
