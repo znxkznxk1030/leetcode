@@ -58,7 +58,6 @@ class Solution {
             }
         }
         
-        println(stack)
         val freq = TreeMap<String, Int>()
         
         for (el in stack) {
