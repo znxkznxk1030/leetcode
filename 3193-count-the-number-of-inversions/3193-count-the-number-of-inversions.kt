@@ -1,9 +1,6 @@
 class Solution {
     val MOD = 1_000_000_007
     fun numberOfPermutations(n: Int, requirements: Array<IntArray>): Int {
-        val list = requirements.toList().sortedWith(compareBy({it[0]}, {it[1]}))
-        list.forEach{ println("${it[0]} ${it[1]}")}
-        
         val map = HashMap<Int, Int>()
         for (req in requirements) {
             map.put(req[0] + 1, req[1])
