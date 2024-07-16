@@ -12,42 +12,45 @@ class Solution {
     fun getDirections(root: TreeNode?, startValue: Int, destValue: Int): String {
         val lca = findLCA(root, startValue, destValue)
         
-        
         var left = Stack<String>()
         findPath(lca, startValue, left)
         var right = Stack<String>()
         findPath(lca, destValue, right)
         
-        return "U".repeat(left.size) + right.joinToString("")
+        val result = "U".repeat(left.size) + right.joinToString("")
+        
+        return result
     }
     
     fun findLCA(node: TreeNode?, v1: Int, v2: Int): TreeNode? {
         if (node == null) return null
+        
         if (node.`val` == v1 || node.`val` == v2) return node
         
-        val leftLCA = findLCA(node.left, v1, v2)
-        val rightLCA = findLCA(node.right, v1, v2)
+        val left = findLCA(node.left, v1, v2)
+        val right = findLCA(node.right, v1, v2)
         
-        if (leftLCA == null) return rightLCA
-        else if (rightLCA == null) return leftLCA
-        else return node
+        if (right == null) return left
+        if (left == null) return right
+        
+        return node
     }
     
-    fun findPath(node: TreeNode?, v: Int, stack: Stack<String>): Boolean {
+    fun findPath(node: TreeNode?, target: Int, path: Stack<String>): Boolean {
         if (node == null) return false
-        if (node.`val` == v) return true
+        if (node.`val` == target) return true
         
-        stack.push("L")
-        if (findPath(node.left, v, stack)) {
+        path.push("L")
+        if(findPath(node.left, target, path)) {
             return true
         }
-        stack.pop()
+        path.pop()
         
-        stack.push("R")
-        if (findPath(node.right, v, stack)) {
+        path.push("R")
+        if(findPath(node.right, target, path)) {
             return true
         }
-        stack.pop()
+        path.pop()
         
         return false
     }
