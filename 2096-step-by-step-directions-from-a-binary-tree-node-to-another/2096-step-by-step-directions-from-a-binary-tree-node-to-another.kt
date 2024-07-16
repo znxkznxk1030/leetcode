@@ -10,81 +10,45 @@
  */
 class Solution {
     fun getDirections(root: TreeNode?, startValue: Int, destValue: Int): String {
-        if(root == null) return ""
+        val lca = findLCA(root, startValue, destValue)
         
-        val parents = HashMap<Int, Pair<TreeNode?, Int>>()
-        var s: Pair<TreeNode?, Int> = Pair(root, -1)
-        var d: Pair<TreeNode?, Int> = Pair(root, -1)
         
-        fun findParent(node: TreeNode?, depth: Int) {
-            if(node == null) return
-            
-            if(node.`val` == startValue) s = Pair(node, depth)
-            if(node.`val` == destValue) d = Pair(node, depth)
-            
-            if (node.left != null) {
-                parents.put(node.left?.`val` ?: -1, Pair(node, depth))
-                findParent(node.left, depth + 1)
-            }
-            
-            if (node.right != null) {
-                parents.put(node.right?.`val` ?: -1, Pair(node, depth))
-                findParent(node.right, depth + 2)
-            }
+        var left = Stack<String>()
+        findPath(lca, startValue, left)
+        var right = Stack<String>()
+        findPath(lca, destValue, right)
+        
+        return "U".repeat(left.size) + right.joinToString("")
+    }
+    
+    fun findLCA(node: TreeNode?, v1: Int, v2: Int): TreeNode? {
+        if (node == null) return null
+        if (node.`val` == v1 || node.`val` == v2) return node
+        
+        val leftLCA = findLCA(node.left, v1, v2)
+        val rightLCA = findLCA(node.right, v1, v2)
+        
+        if (leftLCA == null) return rightLCA
+        else if (rightLCA == null) return leftLCA
+        else return node
+    }
+    
+    fun findPath(node: TreeNode?, v: Int, stack: Stack<String>): Boolean {
+        if (node == null) return false
+        if (node.`val` == v) return true
+        
+        stack.push("L")
+        if (findPath(node.left, v, stack)) {
+            return true
         }
+        stack.pop()
         
-        parents.put(root.`val`, Pair(root, 0))
-        findParent(root, 0)
-        
-        // println(parents)
-
-        var result = ""
-        
-        var commonParent = root
-        var left = ""
-        var right = ""
-        
-        // println("$s $d")
-        
-        while (s != d) {
-            // println("$s $d")
-            if (s.second > d.second) {
-                s = parents.get(s.first!!.`val`)!!
-                left += "U"
-            } else {
-                var prev = d.first
-                d = parents.get(d.first!!.`val`)!!
-                val curr = d.first
-                if (curr?.left == prev) {
-                    right += "L"
-                }
-                
-                if (curr?.right == prev) {
-                    right += "R"
-                }
-            }
+        stack.push("R")
+        if (findPath(node.right, v, stack)) {
+            return true
         }
+        stack.pop()
         
-        // println(left)
-        // println(right)
-        
-        return left + right.reversed()
+        return false
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
