@@ -1,28 +1,67 @@
-# leetcode
-to drill a algorithm skills
+## Convolutional neural networks
 
+### 1. Shallow Learning과 Deep Learning의 개념과 차이점을 구조, 표현력, 학습 방식의 측면에서 비교하여 서술하시오.
 
-## More problems with sliding window/ 2-3 pointers / counting:
+Shallow Learning은 일반적으로 입력층과 출력층 사이에 은닉층이 하나만 존재하는 학습모델을 의미한다.\
+대표적인 예로는 SVM, 로지스틱 회귀, 결정 트리 등이 있다.\
+이들은 특징을 수동으로 추출한 후 모델이 학습하는 방식이며, 특징 엔지니어링의 성능에 크게 의존한다.
+
+반면, Deep Learning은 여러 개의 은닉층을 포함한 신경망 구조로, 입력 데이터로부터 계층적으로 특징을 자동으로 추출하고 학습한다.\
+대표적인 모델로는 CNN, RNN, Transformer등이 있으며, 이미지, 음성, 자연어 처리 등에서 매우 뛰어난 성능을 보인다.
+
+### 2. Fully Connected Neural Network와 Convolutional Neural Network의 구조적 차이와 각각의 장단점을 서술하시오.
+
+- Fully Connected Neural Network는 각 뉴런이 이전 층의 모든 뉴런과 연결되어 있는 구조로, 입력 데이터의 구조적 특성을 고려하지 않고 모든 특징을 동일하게 취급한다.\
+ 이때문에 입력 데이터를 1차원 벡터로 펼쳐야 하며, 위치 정보나 지역적 패턴을 학습하기 어렵다.
+
+- Convolutional Neural Network는 이미지와 같은 2차원 데이터의 공간적 구조를 유지하며, 필터를 통해 지역적인 특징을 추출한다.\
+각 필터는 이미지의 일부분에만 적용되어 파라미터 수가 줄어들고, 지역적 패턴에 대한 학습이 가능하다.
+
+### 3. CNN에서 Convolution Layer, Pooling Layer, Fully Connected Layer의 역할과 차이점을 서술하시오.
+
+- Conv Layer
+  - 입력 데이터의 일부분에 필터(또는 커널)를 적용하여 지역적 특징을 추출하는 역할을 한다.
+  - 파라미터 공유와 지역 연결성을 통해 파라미터 수를 줄이고, 같은 특징이 여러 위치에서 반복되는 패턴을 효과적으로 학습
+- Pooling Layer
+  - Conv Layer에서 추출한 특징맵의 크기를 줄이는 다운샘플링 작업을 수행한다.
+  - 주로 Max Pooling이나 Average Pooling을 사용
+  - 공간정보를 요약해 계산량을 줄이고 과적합을 방지하는데 도음을 준다.
+- Fully Connected Layer
+  - CNN의 마지막 부분에서 사용되며, 추출된 고차원 특징들을 1차원 벡터로 변환한 뒤 최종 분류나 회귀 작업에 사용된다.
+  - 이는 전통적인 MLP 구조와 같으며, 각 뉴런이 이전 층의 모든 뉴런과 연결된다.
+  - 이를 통해 전역적인 판단(global reasoning)을 수행할 수 있다.
+
+### 4. Conv layer 계산문제
+
+Q. 다음 조건에서 파라미터 수와 출력 크기를 계산하시오:
+
+입력: 64×64×1 (흑백 이미지)
+
+Conv 레이어:
+- 필터: 3×3
+- 출력 채널: 32개
+- 스트라이드: 2
+- 패딩: 1
 
 ```txt
-696. Count Binary Substrings
-713. Subarray Product Less Than K
-930. Binary Subarrays With Sum
-parent problem for 3 pointers -> 992. Subarrays with K Different Integers
-1358. Number of Substrings Containing All Three Characters
-1513. Number of Substrings With Only 1s
-1839. Longest Substring Of All Vowels in Order
-2062. Count Vowel Substrings of a String
-2063. Vowels of All Substrings
-2302. Count Subarrays With Score Less Than K
+정답:
+- 출력 크기: 32×32×32
+- 파라피터 수: 320
+```
 
-1358. Number of Substrings Containing All Three Characters
-1248. Count Number of Nice Subarrays
-1234. Replace the Substring for Balanced String
-1004. Max Consecutive Ones III
-930. Binary Subarrays With Sum
-992. Subarrays with K Different Integers
-904. Fruit Into Baskets
-862. Shortest Subarray with Sum at Least K
-209. Minimum Size Subarray Sum
+### 5. Pooling layer 계산문제
+
+Q. 다음 조건에서 파라미터 수와 출력 크기를 계산하시오:
+
+입력 이미지: 28×28×64 (높이×너비×채널)
+
+Max Pooling:
+- 커널 크기: 2×2
+- 스트라이드(stride): 2
+- 패딩(padding): 없음
+
+```txt
+정답:
+- 출력 크기: 14x14x64
+- 파라피터 수: 0
 ```
